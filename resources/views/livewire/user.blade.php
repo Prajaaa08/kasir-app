@@ -1,3 +1,21 @@
 <div>
-    {{-- Nothing in the world is as soft and yielding as water. --}}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <button wire:click="pilihMenu('lihat')"
+                    class="btn {{ $pilihanMenu == 'lihat' ? 'btn-primary' : 'btn-outline-primary' }}">
+                    Semua Pengguna
+                </button>
+                <button wire:click="pilihMenu('tambah')"
+                    class="btn {{ $pilihanMenu == 'tambah' ? 'btn-primary' : 'btn-outline-primary' }}">
+                    Tambah Pengguna
+                </button>
+                <button wire:loading class="btn btn-info">
+                    Loading...
+                </button>
+            </div>
+        </div>
+    </div>
+
 </div>
