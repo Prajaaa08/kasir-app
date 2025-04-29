@@ -41,11 +41,11 @@
                                             <td>{{ $pengguna->peran }}</td>
                                             <td>
                                                 <button wire:click="pilihMenu('edit')"
-                                                    class="btn {{ $pilihanMenu == 'edit' ? 'btn-primary' : 'btn-outline-primary' }}">
+                                                    class="btn {{ $pilihanMenu == 'edit' ? 'btn-primary' : 'btn-outline-danger' }} ">
                                                     Edit Pengguna
                                                 </button>
                                                 <button wire:click="pilihMenu('hapus')"
-                                                    class="btn {{ $pilihanMenu == 'hapus' ? 'btn-primary' : 'btn-outline-primary' }}">
+                                                    class="btn {{ $pilihanMenu == 'hapus' ? 'btn-primary' : 'btn-outline-warning' }}">
                                                     Hapus Pengguna
                                                 </button>
                                             </td>
@@ -61,7 +61,30 @@
                             Tambah Pengguna
                         </div>
                         <div class="card-body">
-                            test
+                            <form action="" wire:submit="simpan">
+                                <label for="">Nama</label>
+                                <input type="text" class="form-control" wire:model="nama" />
+                                @error('nama')
+                                <span class="text-danger">Nama harus diisi</span>
+                                @enderror
+                                <label for="" class="mt-2">Email</label>
+                                <input type="email" class="form-control" wire:model="email" />
+                                @error('email')
+                                <span class="text-danger">Email harus diisi</span>
+                                @enderror
+                                <label for="" class="mt-2">Password</label>
+                                <input type="password" class="form-control" wire:model="password" />
+                                @error('password')
+                                <span class="text-danger">Password harus diisi</span>
+                                @enderror
+                                <label for="" class="mt-2">Peran</label>
+                                <select name="" id="" class="form-control" wire:model='peran'>
+                                    <option>Pilih Peran</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="kasir">Kasir</option>
+                                </select>
+                                <button type="submit" class="btn btn-outline-success mt-4">Simpan</button>
+                            </form>
                         </div>
                     </div>
                 @elseif ($pilihanMenu == 'edit')
