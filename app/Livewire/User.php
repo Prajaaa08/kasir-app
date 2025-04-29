@@ -18,9 +18,36 @@ class User extends Component
         $this->penggunaTerpilih = ModelUser::findOrFail($id);
         $this->nama = $this->penggunaTerpilih->name;
         $this->email = $this->penggunaTerpilih->email;
-        $this->password = $this->penggunaTerpilih->password;
         $this->peran = $this->penggunaTerpilih->peran;
         $this->pilihanMenu = "edit";
+    }
+    public function simpanEdit()
+    {
+        $this->validate([
+            'nama' => 'required',
+            'email' => ['required','email','unique:users,email,'.$this->penggunaTerpilih->id],
+            'peran' => 'required',
+            'password' => 'nullable|min:6'
+        ],[
+            'nama.required' => 'Nama tidak boleh kosong',
+            'email.required' => 'Email tidak boleh kosong',
+            'email.email' => 'Format email tidak valid',
+            'email.unique' => 'Email sudah terdaftar',
+            'peran.required' => 'Peran tidak boleh kosong',
+            'password.min' => 'Password minimal 6 karakter'
+        ]);
+        $simpan = $this->penggunaTerpilih;
+        $simpan->name = $this->nama;
+        $simpan->email = $this->email;
+        if ($this->password) {
+            $simpan->password = bcrypt($this->password);
+        }
+        $simpan->peran = $this->peran;
+        $simpan->save();
+
+        $this->reset(['nama', 'email', 'password', 'peran', 'penggunaTerpilih']);
+        $this->pilihanMenu = "lihat";
+        session()->flash('pesan', 'Data berhasil disimpan');
     }
     public function pilihHapus($id)
     {
