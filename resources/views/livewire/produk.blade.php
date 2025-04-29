@@ -98,38 +98,32 @@
                             Edit produk
                         </div>
                         <div class="card-body">
-                            <form action="" wire:submit="simpanEdit">
+                            <form action="" wire:submit="simpan">
                                 <label for="">Nama</label>
                                 <input type="text" class="form-control" wire:model="nama" />
                                 @error('nama')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                                 <br>
-                                <label for="" class="mt-2">Email</label>
-                                <input type="email" class="form-control" wire:model="email" />
-                                @error('email')
+                                <label for="" class="mt-2">Kode / Barcode</label>
+                                <input type="string" class="form-control" wire:model="kode" />
+                                @error('kode')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                                 <br>
-                                <label for="" class="mt-2">Password</label>
-                                <input type="password" class="form-control" wire:model="password" />
-                                @error('password')
+                                <label for="" class="mt-2">Harga</label>
+                                <input type="number" class="form-control" wire:model="harga" />
+                                @error('harga')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                                 <br>
-                                <label for="" class="mt-2">Peran</label>
-                                <select name="" id="" class="form-control" wire:model='peran'>
-                                    <option>Pilih Peran</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="kasir">Kasir</option>
-                                </select>
-                                @error('peran')
+                                <label for="" class="mt-2">Stok</label>
+                                <input type="number" class="form-control" wire:model="stok" />
+                                @error('stok')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                                 <br>
                                 <button type="submit" class="btn btn-outline-success mt-4">Simpan</button>
-                                <button type="button" wire:click='batal'
-                                    class="btn btn-outline-secondary mt-4">Batal</button>
                             </form>
                         </div>
                     </div>

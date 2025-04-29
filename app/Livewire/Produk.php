@@ -27,27 +27,25 @@ class Produk extends Component
     {
         $this->validate([
             'nama' => 'required',
-            'kode' => ['required', 'kode', 'unique:produks,kode,' . $this->produkTerpilih->id],
+            'kode' => ['required', 'unique:produks,kode,'.$this->produkTerpilih->id],
             'harga' => 'required',
-            'stok' => 'nullable|min:6'
+            'stok' => 'required'
         ], [
             'nama.required' => 'Nama tidak boleh kosong',
-            'kode.required' => 'Email tidak boleh kosong',
-            'kode.kode' => 'Format kode tidak valid',
-            'kode.unique' => 'Email sudah terdaftar',
-            'harga.required' => 'Peran tidak boleh kosong',
-            'stok.min' => 'stok minimal 6 karakter'
+            'kode.required' => 'Kode tidak boleh kosong',
+            'kode.unique' => 'Kode sudah terdaftar',
+            'harga.required' => 'Harga tidak boleh kosong',
+            'stok.required' => 'Stok tidak boleh kosong'
         ]);
+
         $simpan = $this->produkTerpilih;
         $simpan->nama = $this->nama;
         $simpan->kode = $this->kode;
-        if ($this->stok) {
-            $simpan->stok = bcrypt($this->stok);
-        }
+        $simpan->stok = $this->stok;
         $simpan->harga = $this->harga;
         $simpan->save();
 
-        $this->reset(['nama', 'kode', 'stok', 'harga', 'produkTerpilih']);
+        $this->reset();
         $this->pilihanMenu = "lihat";
         session()->flash('pesan', 'Data berhasil disimpan');
     }
