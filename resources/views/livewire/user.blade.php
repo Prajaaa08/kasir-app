@@ -42,11 +42,11 @@
                                             <td>
                                                 <button wire:click="pilihMenu('edit')"
                                                     class="btn {{ $pilihanMenu == 'edit' ? 'btn-primary' : 'btn-outline-warning' }} ">
-                                                    Edit Pengguna
+                                                    Edit 
                                                 </button>
-                                                <button wire:click="pilihMenu('hapus')"
-                                                    class="btn {{ $pilihanMenu == 'hapus' ? 'btn-primary' : 'btn-outline-danger' }}">
-                                                    Hapus Pengguna
+                                                <button wire:click="pilihHapus({{ $pengguna->id }})"
+                                                    class="btn {{ $pilihanMenu == 'hapus' ? 'btn-primary' : 'btn-outline-danger' }} ">
+                                                    Hapus
                                                 </button>
                                             </td>
                                         </tr>
@@ -71,13 +71,13 @@
                                 <label for="" class="mt-2">Email</label>
                                 <input type="email" class="form-control" wire:model="email" />
                                 @error('email')
-                                <span class="text-danger">Email harus diisi</span>
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                                 <br>
                                 <label for="" class="mt-2">Password</label>
                                 <input type="password" class="form-control" wire:model="password" />
                                 @error('password')
-                                <span class="text-danger">Password harus diisi</span>
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                                 <br>
                                 <label for="" class="mt-2">Peran</label>
@@ -87,7 +87,7 @@
                                     <option value="kasir">Kasir</option>
                                 </select>
                                 @error('peran')
-                                <span class="text-danger">Peran harus dipilih</span>
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                                 <br>
                                 <button type="submit" class="btn btn-outline-success mt-4">Simpan</button>
@@ -100,16 +100,19 @@
                             Edit Pengguna
                         </div>
                         <div class="card-body">
-                            test
+                            
                         </div>
                     </div>
                 @elseif ($pilihanMenu == 'hapus')
-                    <div class="card border-primary">
-                        <div class="card-header">
+                    <div class="card border-danger">
+                        <div class="card-header bg-danger text-white">
                             Hapus Pengguna
                         </div>
                         <div class="card-body">
-                            test
+                            Anda yakin ingin menghapus pengguna ini?
+                            <p>Nama : {{ $penggunaTerpilih->name }}</p>
+                            <button class="btn btn-danger" wire:click='hapus'>Hapus</button>
+                            <button class="btn btn-secondary" wire:click='batal'>Batal</button>
                         </div>
                     </div>
                 @endif

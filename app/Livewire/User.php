@@ -11,6 +11,31 @@ class User extends Component
     public $email;
     public $password;
     public $peran;
+    public $penggunaTerpilih;
+
+    public function pilihEdit($id)
+    {
+        $this->penggunaTerpilih = ModelUser::findOrFail($id);
+        $this->nama = $this->penggunaTerpilih->name;
+        $this->email = $this->penggunaTerpilih->email;
+        $this->password = $this->penggunaTerpilih->password;
+        $this->peran = $this->penggunaTerpilih->peran;
+        $this->pilihanMenu = "edit";
+    }
+    public function pilihHapus($id)
+    {
+        $this->penggunaTerpilih = ModelUser::findOrFail($id);
+        $this->pilihanMenu = "hapus";
+    }
+    public function batal()
+    {
+        $this->reset();
+    }
+    public function hapus()
+    {
+        $this->penggunaTerpilih->delete();
+        $this->pilihanMenu = "lihat";
+    }
 
     public function simpan()
     {
