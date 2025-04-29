@@ -98,7 +98,7 @@
                             Edit produk
                         </div>
                         <div class="card-body">
-                            <form action="" wire:submit="simpan">
+                            <form action="" wire:submit="simpanEdit">
                                 <label for="">Nama</label>
                                 <input type="text" class="form-control" wire:model="nama" />
                                 @error('nama')
