@@ -140,7 +140,9 @@
                         </div>
                         <div class="card-body">
                             Anda yakin ingin menghapus produk ini?
-                            <p>Nama : {{ $produkTerpilih->name }}</p>
+                            <br>
+                            <p>Nama : {{ $produkTerpilih->nama }}</p>
+                            <p>Kode : {{ $produkTerpilih->kode }}</p>
                             <button class="btn btn-danger" wire:click='hapus'>Hapus</button>
                             <button class="btn btn-secondary" wire:click='batal'>Batal</button>
                         </div>
