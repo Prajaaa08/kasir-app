@@ -50,6 +50,9 @@ class Transaksi extends Component
     {
         if ($this->transaksiAktif) {
             $semuaProduk = DetilTransaksi::where('transaksi_id', $this->transaksiAktif->id)->get();
+            $this->totalSemuaBelanja = $semuaProduk->sum(function ($detil) {
+                return $detil->produk->harga * $detil->jumlah;
+            });
         } else {
             $semuaProduk = [];
         }

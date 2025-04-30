@@ -56,7 +56,7 @@
                             <h4 class="card-title">Total Biaya</h4>
                             <div class="flex justify-content-betweeen">
                                 <span>Rp.</span>
-                                <span>{{ number_format('9999999', 2, '.', ',') }}</span>
+                                <span>{{ number_format($totalSemuaBelanja, 2, '.', ',') }}</span>
                             </div>
                         </div>
                     </div>
