@@ -44,6 +44,8 @@ class Transaksi extends Component
             );
             $detil->jumlah += 1;
             $detil->save();
+            $produk->stok -= 1;
+            $produk->save();
             $this->reset('kode');
         }
     }
