@@ -49,7 +49,7 @@ class Transaksi extends Component
     }
     public function updatedBayar()
     {
-        if ($this->bayar > 0 ) {
+        if ($this->bayar > 0) {
             $this->kembalian = $this->bayar - $this->totalSemuaBelanja;
         }
     }
