@@ -8,7 +8,8 @@ use Livewire\Component;
 
 class Transaksi extends Component
 {
-    public $kode, $total, $status, $bayar, $kembalian, $totalSemuaBelanja;
+    public $kode, $total, $status, $kembalian, $totalSemuaBelanja;
+    public $bayar = 0;
     public $transaksiAktif;
 
     public function transaksiBaru()
@@ -45,6 +46,26 @@ class Transaksi extends Component
             $detil->save();
             $this->reset('kode');
         }
+    }
+    public function updatedBayar()
+    {
+        if ($this->bayar > 0 ) {
+            $this->kembalian = $this->bayar - $this->totalSemuaBelanja;
+        }
+    }
+    public function hapusProduk($id)
+    {
+        $detil = DetilTransaksi::find($id);
+        if ($detil) {
+            $detil->delete();
+        }
+    }
+    public function transaksiSelesai()
+    {
+        $this->transaksiAktif->total = $this->totalSemuaBelanja;
+        $this->transaksiAktif->status = 'selesai';
+        $this->transaksiAktif->save();
+        $this->reset();
     }
     public function render()
     {
