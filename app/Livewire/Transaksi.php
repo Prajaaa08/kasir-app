@@ -27,6 +27,9 @@ class Transaksi extends Component
         if ($this->transaksiAktif) {
             $detilTransaksi = DetilTransaksi::where('transaksi_id', $this->transaksiAktif->id)->get();
             foreach ($detilTransaksi as $detil) {
+                $produk = Produk::find($detil->produk_id);
+                $produk->stok += $detil->jumlah;
+                $produk->save();
                 $detil->delete();
             }
             $this->transaksiAktif->delete();
