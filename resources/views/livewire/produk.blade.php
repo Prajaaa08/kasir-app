@@ -11,6 +11,10 @@
                     class="btn {{ $pilihanMenu == 'tambah' ? 'btn-primary' : 'btn-outline-primary' }}">
                     Tambah produk
                 </button>
+                <button wire:click="pilihMenu('excel')"
+                    class="btn {{ $pilihanMenu == 'excel' ? 'btn-primary' : 'btn-outline-primary' }}">
+                    Import produk
+                </button>
                 <button wire:loading class="btn btn-info">
                     Loading...
                 </button>
@@ -139,6 +143,18 @@
                             <p>Kode : {{ $produkTerpilih->kode }}</p>
                             <button class="btn btn-danger" wire:click='hapus'>Hapus</button>
                             <button class="btn btn-secondary" wire:click='batal'>Batal</button>
+                        </div>
+                    </div>
+                @elseif ($pilihanMenu == 'excel')
+                    <div class="card border-success">
+                        <div class="card-header bg-success text-white">
+                            Import Produk
+                        </div>
+                        <div class="card-body">
+                            <form wire:submit='imporExcel'>
+                                <input type="file" class="form-control" wire:model="fileExcel" />
+                                <button class="btn btn-outline-success mt-3" type="submit">Kirim</button>
+                            </form>
                         </div>
                     </div>
                 @endif
