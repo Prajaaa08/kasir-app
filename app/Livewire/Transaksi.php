@@ -59,8 +59,11 @@ class Transaksi extends Component
     {
         $detil = DetilTransaksi::find($id);
         if ($detil) {
-            $detil->delete();
+            $produk = Produk::find($detil->produk_id);
+            $produk->stok += $detil->jumlah;
+            $produk->save();
         }
+        $detil->delete();
     }
     public function transaksiSelesai()
     {
