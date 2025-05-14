@@ -64,7 +64,8 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
                                                                  document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
@@ -88,22 +89,27 @@
                             class="btn {{ request()->routeIs('home') ? 'btn-primary' : 'btn-outline-primary' }}">
                             Beranda
                         </a>
-                        <a href="{{ route('user') }}" wire:navigate
-                            class="btn {{ request()->routeIs('user') ? 'btn-primary' : 'btn-outline-primary' }}">
-                            Pengguna
-                        </a>
-                        <a href="{{ route('produk') }}" wire:navigate
-                            class="btn {{ request()->routeIs('produk') ? 'btn-primary' : 'btn-outline-primary' }}">
-                            Produk
-                        </a>
-                        <a href="{{ route('transaksi') }}" wire:navigate
-                            class="btn {{ request()->routeIs('transaksi') ? 'btn-primary' : 'btn-outline-primary' }}">
-                            Transaksi
-                        </a>
-                        <a href="{{ route('laporan') }}" wire:navigate
-                            class="btn {{ request()->routeIs('laporan') ? 'btn-primary' : 'btn-outline-primary' }}">
-                            Laporan
-                        </a>
+                        {{-- @if (Auth::user()->peran == 'admin') --}}
+                            <a href="{{ route('user') }}" wire:navigate
+                                class="btn {{ request()->routeIs('user') ? 'btn-primary' : 'btn-outline-primary' }}">
+                                Pengguna
+                            </a>
+                        {{-- @endif --}}
+                        {{-- @if (Auth::user()->peran == 'admin') --}}
+
+                            <a href="{{ route('produk') }}" wire:navigate
+                                class="btn {{ request()->routeIs('produk') ? 'btn-primary' : 'btn-outline-primary' }}">
+                                Produk
+                            </a>
+                        {{-- @endif --}}
+                            <a href="{{ route('transaksi') }}" wire:navigate
+                                class="btn {{ request()->routeIs('transaksi') ? 'btn-primary' : 'btn-outline-primary' }}">
+                                Transaksi
+                            </a>
+                            <a href="{{ route('laporan') }}" wire:navigate
+                                class="btn {{ request()->routeIs('laporan') ? 'btn-primary' : 'btn-outline-primary' }}">
+                                Laporan
+                            </a>
                     </div>
                 </div>
             </div>
