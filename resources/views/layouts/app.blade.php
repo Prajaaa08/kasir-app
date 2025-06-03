@@ -20,6 +20,9 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Unicons CDN -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
 
     <style>
         /* Please ❤ this if you like it! */
@@ -344,7 +347,7 @@
             height: 26px;
             width: auto;
             display: block;
-            
+
         }
     </style>
 </head>

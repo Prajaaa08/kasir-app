@@ -12,6 +12,11 @@
                     <div class="card-3d-wrap mx-auto">
                         <div class="card-3d-wrapper">
                             <div class="card-front">
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
 
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
@@ -57,22 +62,9 @@
                                 <div class="center-wrap">
                                     <div class="section text-center">
                                         <h4 class="mb-4 pb-3">Sign Up</h4>
-                                        <div class="form-group">
-                                            <input type="text" name="logname" class="form-style"
-                                                placeholder="Your Full Name" id="logname" autocomplete="off">
-                                            <i class="input-icon uil uil-user"></i>
+                                        <div class="card-body">
+                                            @livewire('daftar')
                                         </div>
-                                        <div class="form-group mt-2">
-                                            <input type="email" name="logemail" class="form-style"
-                                                placeholder="Your Email" id="logemail" autocomplete="off">
-                                            <i class="input-icon uil uil-at"></i>
-                                        </div>
-                                        <div class="form-group mt-2">
-                                            <input type="password" name="logpass" class="form-style"
-                                                placeholder="Your Password" id="logpass" autocomplete="off">
-                                            <i class="input-icon uil uil-lock-alt"></i>
-                                        </div>
-                                        <a href="#" class="btn mt-4">submit</a>
                                     </div>
                                 </div>
                             </div>
@@ -83,3 +75,8 @@
         </div>
     </div>
 </div>
+<script>
+    Livewire.on('toggleToLogin', () => {
+        document.getElementById('reg-log').checked = false;
+    });
+</script>
