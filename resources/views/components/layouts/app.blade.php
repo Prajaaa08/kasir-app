@@ -14,18 +14,108 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    <!-- Scripts -->
-    <!-- Latest compiled and minified CSS -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .search {
+            margin-bottom: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            height: 50px;
+            background-color: #fff;
+            padding: 11px;
+            border: gray 1px solid;
+            border-radius: 30px;
+        }
+
+        .search-input {
+
+            color: gray;
+            border: 0;
+            outline: 0;
+            background: none;
+            width: 0;
+            caret-color: transparent;
+            line-height: 20px;
+            transition: width 0.4s linear;
+
+        }
+
+        .search .search-input {
+            padding: 0 15px;
+            width: 400px;
+            caret-color: #536bf6;
+            font-size: 21px;
+            font-weight: 100;
+            color: black;
+            transition: width 0.4s linear;
+        }
+
+        .search-icon:hover {
+            background: #1A237E;
+            color: #fff;
+        }
+
+        .search-icon {
+
+            height: 45px;
+            width: 50px;
+            float: right;
+            margin-top: 14px;
+            margin-left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            background-color: #536bf6;
+            border-radius: 30px;    
+            border: none;
+
+        }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        .nav-button {
+            margin: 0.25rem;
+            transition: 0.3s ease;
+            border-radius: 0.5rem;
+            padding: 10px 16px;
+            font-weight: 500;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.05);
+            background-color: #0056b3;
+            color: white;
+        }
+
+        .nav-button.active {
+            background-color: #0069d9 !important;
+            color: white !important;
+            border-color: #0069d9 !important;
+        }
+
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -36,85 +126,74 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                                 document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <a href="{{ route('home') }}" wire:navigate
-                            class="btn {{ request()->routeIs('home') ? 'btn-primary' : 'btn-outline-primary' }}">
-                            Beranda
+                    <!-- Centered Navigation Buttons -->
+                    <div class="mx-auto justify-content-center">
+                        <a href="{{ route('home') }}"
+                            class="btn nav-button {{ request()->routeIs('home') ? 'active' : 'btn-outline-light' }}">
+                            <i class="fa-solid fa-house"></i> Beranda
                         </a>
-                        {{-- @if (Auth::user()->peran == 'admin') --}}
-                            <a href="{{ route('user') }}" wire:navigate
-                                class="btn {{ request()->routeIs('user') ? 'btn-primary' : 'btn-outline-primary' }}">
-                                Pengguna
+                        @if (Auth::check() && Auth::user()->peran == 'admin')
+                            <a href="{{ route('user') }}"
+                                class="btn nav-button {{ request()->routeIs('user') ? 'active' : 'btn-outline-light' }}">
+                                <i class="fa-solid fa-user"></i> Pengguna
                             </a>
-                        {{-- @endif --}}
-                        {{-- @if (Auth::user()->peran == 'admin') --}}
-
-                            <a href="{{ route('produk') }}" wire:navigate
-                                class="btn {{ request()->routeIs('produk') ? 'btn-primary' : 'btn-outline-primary' }}">
-                                Produk
-                            </a>
-                        {{-- @endif --}}
-                            <a href="{{ route('transaksi') }}" wire:navigate
-                                class="btn {{ request()->routeIs('transaksi') ? 'btn-primary' : 'btn-outline-primary' }}">
-                                Transaksi
-                            </a>
-                            <a href="{{ route('laporan') }}" wire:navigate
-                                class="btn {{ request()->routeIs('laporan') ? 'btn-primary' : 'btn-outline-primary' }}">
-                                Laporan
-                            </a>
+                        @endif
+                        <a href="{{ route('produk') }}"
+                            class="btn nav-button {{ request()->routeIs('produk') ? 'active' : 'btn-outline-light' }}">
+                            <i class="fa-solid fa-box"></i> Produk
+                        </a>
+                        <a href="{{ route('transaksi') }}"
+                            class="btn nav-button {{ request()->routeIs('transaksi') ? 'active' : 'btn-outline-light' }}">
+                            <i class="fa-solid fa-cart-shopping"></i> Transaksi
+                        </a>
+                        <a href="{{ route('laporan') }}"
+                            class="btn nav-button {{ request()->routeIs('laporan') ? 'active' : 'btn-outline-light' }}">
+                            <i class="fa-solid fa-book"></i> Laporan
+                        </a>
                     </div>
                 </div>
+
+
+                <!-- Right Side Auth Links -->
+                <ul class="navbar-nav ms-auto">
+                    @guest
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                        @endif
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
             </div>
+    </div>
+    </nav>
+
+    <main class="py-4">
+        <div class="container">
             {{ $slot }}
-        </main>
+        </div>
+    </main>
     </div>
 </body>
 

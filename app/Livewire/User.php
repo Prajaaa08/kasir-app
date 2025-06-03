@@ -13,12 +13,12 @@ class User extends Component
     public $peran;
     public $penggunaTerpilih;
 
-    // public function mount()
-    // {
-    //     if (auth()->user()->peran != "admin") {
-    //         abort(403);
-    //     }
-    // }
+    public function mount()
+    {
+        if (auth()->user()->peran != "admin") {
+            abort(403);
+        }
+    }
 
     public function pilihEdit($id)
     {

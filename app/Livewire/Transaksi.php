@@ -73,8 +73,16 @@ class Transaksi extends Component
         $this->transaksiAktif->total = $this->totalSemuaBelanja;
         $this->transaksiAktif->status = 'selesai';
         $this->transaksiAktif->save();
+
+        // Kirim event ke browser untuk tampilkan alert
+        $this->dispatch(
+            'transaksi-selesai',
+            'Transaksi berhasil'
+        );
+
         $this->reset();
     }
+
     public function render()
     {
         if ($this->transaksiAktif) {
@@ -90,4 +98,5 @@ class Transaksi extends Component
             'semuaProduk' => $semuaProduk
         ]);
     }
+
 }

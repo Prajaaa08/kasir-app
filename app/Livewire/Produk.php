@@ -43,7 +43,7 @@ class Produk extends Component
     {
         $this->validate([
             'nama' => 'required',
-            'kode' => ['required', 'unique:produks,kode,'.$this->produkTerpilih->id],
+            'kode' => ['required', 'unique:produks,kode,' . $this->produkTerpilih->id],
             'harga' => 'required',
             'stok' => 'required'
         ], [
@@ -78,6 +78,11 @@ class Produk extends Component
     {
         $this->produkTerpilih->delete();
         $this->pilihanMenu = "lihat";
+
+        $this->dispatch(
+            'hapus-produk',
+            'Produk berhasil dihapus'
+        );
     }
 
     public function simpan()
@@ -104,7 +109,11 @@ class Produk extends Component
 
         $this->reset(['nama', 'kode', 'stok', 'harga']);
         $this->pilihanMenu = "lihat";
-        session()->flash('pesan', 'Data berhasil disimpan');
+
+        $this->dispatch(
+            'simpan-produk',
+            'Produk berhasil disimpan'
+        );
     }
     public function pilihMenu($menu)
     {
